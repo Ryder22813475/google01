@@ -26,7 +26,7 @@ mongoose
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "client", "build")));
+app.use(express.static(path.join(__dirname, "build")));
 
 app.use(
   session({
@@ -59,7 +59,7 @@ if (
   process.env.NODE_ENV === "staging"
 ) {
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+    res.sendFile(path.join(__dirname, "build", "index.html"));
   });
 }
 
