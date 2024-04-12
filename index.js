@@ -26,7 +26,7 @@ mongoose
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(
   session({
@@ -53,15 +53,6 @@ app.use("/profile", profileRoutes);
 app.get("/", (req, res) => {
   return res.render("index", { user: req.user });
 });
-
-if (
-  process.env.NODE_ENV === "production" ||
-  process.env.NODE_ENV === "staging"
-) {
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "build", "index.html"));
-  });
-}
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}.`);
